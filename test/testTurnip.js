@@ -17,3 +17,8 @@ TurnipTest.prototype.testPlantTurnipAndCannotPull = function() {
   this.turnip.plant(this.TURNIP_VALUE);
   assertFalse(this.turnip.pull(this.FORCE_LOWER_THEN_VALUE));
 };
+
+TurnipTest.prototype.testPullTurnipEqualToForce = function() {
+  this.turnip.plant(this.TURNIP_VALUE);
+  assertTrue(this.turnip.pull(this.TURNIP_VALUE));
+};
