@@ -8,7 +8,7 @@ ActorTest.prototype.setUp = function () {
   this.actor.setGarden(this.garden);
 };
 
-TurnipTest.prototype.TURNIP_VALUE = 2;
+ActorTest.prototype.TURNIP_VALUE = 2;
 
 ActorTest.prototype.testSimpleActor = function() {
   this.actor.plantTurnip(this.TURNIP_VALUE);
