@@ -62,7 +62,7 @@ ActorTest.prototype.testActorPullTurnipWithHelpActor = function() {
     this.givenGarden(this.helpActor);
     this.givenActor("Hero4", 2, this.garden, this.dispatcher);
     this.givenTurnipPossibleToPullOut(false);
-    this.actor.helpActor = this.helpActor
+    this.actor.helpActor = this.helpActor;
     this.actor.plantTurnip(2);
     this.actor.pullTurnip(this.turnip, 2);
     verify(this.helpActor, once()).pullTurnip(this.turnip, 4);
@@ -81,7 +81,7 @@ ActorTest.prototype.givenActor = function(name, force, garden, dispatcher) {
     this.actor.name = name;
     this.actor.force = force;
     this.actor.setGarden(garden);
-    this.actor.setEventDispatcher(dispatcher)
+    this.actor.setEventDispatcher(dispatcher);
 };
 
 ActorTest.prototype.givenTurnipPossibleToPullOut = function(canPullOut) {
