@@ -9,20 +9,20 @@ Garden = function() {
   this.turnips = [];
 };
 
-Garden.prototype.callTheBestActor = function() {
-  var actor = new Actor(this.actorsDictionary[0]);
+Garden.prototype.callTheActor = function() {
+  var actor = Actor.factory();
   this.actors.push(actor);
   return actor;
 };
 
-Garden.prototype.getTurnipSeed = function() {
-  var turnip = new Turnip();
-  this.turnips.push(turnip);
-  return turnip;
+Garden.prototype.callTheBestActor = function() {
+  return this.callTheActor();
 };
 
-Garden.prototype.plantTheTurnip = function(turnip) {
+Garden.prototype.getTurnipSeed = function() {
+  var turnip = Turnip.factory();
   this.turnips.push(turnip);
+  return turnip;
 };
 
 Garden.prototype.pullTheTurnip = function(turnip) {

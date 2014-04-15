@@ -14,6 +14,10 @@ Actor = function() {
   this.starter = false;
 };
 
+Actor.factory = function() {
+  return new Actor();
+};
+
 Actor.prototype.TRY_AGAIN = "try_again";
 
 Actor.prototype.setGarden = function(garden) {
@@ -53,6 +57,7 @@ Actor.prototype.pullTurnip = function(turnip, force) {
 
 Actor.prototype.pull = function(turnip, force) {
   if (turnip.pull(force)) {
+    this.garden.pullTheTurnip(turnip);
     console.log("Finally pulled out the turnip!");
   } else {
     console.log("Cannot pull out the turnip.");

@@ -6,11 +6,15 @@
 
 Turnip = function() {};
 
+Turnip.factory = function() {
+  return new Turnip();
+};
+
 /**
  * @param value {Integer}
  */
 Turnip.prototype.plant = function(value) {
-  console.log("Выросла репка большая-пребольшая (" + value + ")");
+  console.info("Turnip grown up (" + value + ")");
   this.value = value;
 };
 

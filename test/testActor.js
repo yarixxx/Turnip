@@ -14,6 +14,7 @@ ActorTest.prototype.testActorPlantTurnip = function() {
   this.actor.plantTurnip(2);
   verify(this.garden, once()).getTurnipSeed();
   verify(this.turnip, once()).plant(this.TURNIP_VALUE);
+  verify(this.garden, never()).pullTheTurnip(this.turnip);
   verify(this.turnip, never()).pull(2);
   verify(this.garden, never()).callTheBestActor();
   verify(this.dispatcher, never()).triggerEvent(Actor.TRY_AGAIN);
@@ -26,6 +27,7 @@ ActorTest.prototype.testActorPullTurnip = function() {
   this.actor.plantTurnip(1);
   this.actor.pullTurnip(this.turnip, 0);
   verify(this.turnip, once()).pull(2);
+  verify(this.garden, once()).pullTheTurnip(this.turnip);
   verify(this.garden, never()).callTheBestActor();
   verify(this.dispatcher, never()).triggerEvent(Actor.TRY_AGAIN);
 };
@@ -38,6 +40,7 @@ ActorTest.prototype.testActorPullTurnipAndCallHelper = function() {
   this.actor.pullTurnip(this.turnip, 2);
   verify(this.turnip, once()).pull(4);
   verify(this.garden, once()).callTheBestActor();
+  verify(this.garden, never()).pullTheTurnip(this.turnip);
   verify(this.dispatcher, never()).triggerEvent(Actor.TRY_AGAIN);
 };
 
@@ -51,6 +54,7 @@ ActorTest.prototype.testActorPullTurnipAndCallValidHelper = function() {
     verify(this.turnip, once()).pull(4);
     verify(this.garden, once()).callTheBestActor();
     verify(this.dispatcher, once()).triggerEvent(Actor.TRY_AGAIN);
+    verify(this.garden, never()).pullTheTurnip(this.turnip);
 };
 
 ActorTest.prototype.testActorPullTurnipWithHelpActor = function() {
