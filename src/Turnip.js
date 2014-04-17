@@ -22,5 +22,6 @@ Turnip.prototype.plant = function(value) {
  * @param force {Integer}
  */
 Turnip.prototype.pull = function(force) {
+  console.log("pull " + force + " " + this.value);
   return force >= this.value;
 };
