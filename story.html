@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+    <script src="libs\EventDispatcher.js"></script>
+    <script src="src\Actor.js"></script>
+    <script src="src\Turnip.js"></script>
+    <script src="src\Garden.js"></script>
+    <script>
+        var dispatcher = new EventDispatcher();
+        var garden = new Garden();
+        garden.setEventDispatcher(dispatcher);
+        var actor = garden.callTheBestActor();
+        actor.plantTurnip(3.11);
+        actor.pull(actor.turnip, 0);
+    </script>
+
+</body>
+</html>
