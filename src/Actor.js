@@ -39,7 +39,7 @@ Actor.prototype.plantTurnip = function(value) {
   this.starter = true;
   this.dispatcher.addEventListener(Actor.TRY_AGAIN, function() {
     if (this.starter) {
-        this.pullTurnip();
+        this.pullTurnip(this.turnip, this.force);
     }
   }.bind(this));
 };
@@ -58,7 +58,8 @@ Actor.prototype.pullTurnip = function(turnip, force) {
 Actor.prototype.pull = function(turnip, force) {
   if (turnip.pull(force)) {
     this.garden.pullTheTurnip(turnip);
-    console.log("Finally pulled out the turnip!");
+    console.log("Finally pulled out the turnip with force ("+force+")!");
+    console.log("The help of " + this.name + " was very important.");
   } else {
     console.log("Cannot pull out the turnip.");
     this.callSomeone();
@@ -68,7 +69,7 @@ Actor.prototype.pull = function(turnip, force) {
 Actor.prototype.callSomeone = function() {
   this.helpActor = this.garden.callTheBestActor();
   if (this.helpActor) {
-    console.log("The " + this.name + " called " + this.helpActor.getName());
+    console.log("The " + this.name + " called " + this.helpActor.name);
     this.dispatcher.triggerEvent(Actor.TRY_AGAIN);
   } else {
     console.log("The " + this.name + " was asking for help with no success.");
