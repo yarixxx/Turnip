@@ -1,6 +1,7 @@
 var ActorTest = TestCase("ActorTest");
 
 ActorTest.prototype.setUp = function () {
+  this.storyTeller = new StoryTeller();
   console.log("New story...");
   this.dispatcher = mock(EventDispatcher);
 };
@@ -82,6 +83,7 @@ ActorTest.prototype.givenActor = function(name, force, garden, dispatcher) {
     this.actor.force = force;
     this.actor.setGarden(garden);
     this.actor.setEventDispatcher(dispatcher);
+    this.actor.setStoryTeller(this.storyTeller);
 };
 
 ActorTest.prototype.givenTurnipPossibleToPullOut = function(canPullOut) {

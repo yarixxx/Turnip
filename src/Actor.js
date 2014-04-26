@@ -12,6 +12,7 @@ Actor = function() {
   this.helpActor = null;
   this.dispatcher = null;
   this.starter = false;
+  this.storyTeller = null;
 };
 
 Actor.factory = function() {
@@ -19,6 +20,10 @@ Actor.factory = function() {
 };
 
 Actor.prototype.TRY_AGAIN = "try_again";
+
+Actor.prototype.setStoryTeller = function(storyTeller) {
+  this.storyTeller = storyTeller;
+};
 
 Actor.prototype.setGarden = function(garden) {
   this.garden = garden;
@@ -33,7 +38,7 @@ Actor.prototype.getName = function() {
 };
 
 Actor.prototype.plantTurnip = function(value) {
-  console.log("The " + this.name + " planted a turnip.");
+  this.storyTeller.tell("The " + this.name + " planted a turnip.");
   this.turnip = this.garden.getTurnipSeed(); 
   this.turnip.plant(value);
   this.starter = true;
@@ -47,10 +52,10 @@ Actor.prototype.plantTurnip = function(value) {
 Actor.prototype.pullTurnip = function(turnip, force) {
   force = force || 0;
   if (this.helpActor) {
-    console.log("The " + this.name + " added force " + force);
+    this.storyTeller.tell("The " + this.name + " added force " + force);
     this.helpActor.pullTurnip(turnip, force + this.force);
   } else {
-    console.log("The " + this.name + " pulled turnip with final force " + force);
+    this.storyTeller.tell("The " + this.name + " pulled turnip with final force " + force);
     this.pull(turnip, force + this.force);
   }
 };
@@ -58,10 +63,10 @@ Actor.prototype.pullTurnip = function(turnip, force) {
 Actor.prototype.pull = function(turnip, force) {
   if (turnip.pull(force)) {
     this.garden.pullTheTurnip(turnip);
-    console.log("Finally pulled out the turnip with force ("+force+")!");
-    console.log("The help of " + this.name + " was very important.");
+    this.storyTeller.tell("Finally pulled out the turnip with force ("+force+")!");
+    this.storyTeller.tell("The help of " + this.name + " was very important.");
   } else {
-    console.log("Cannot pull out the turnip.");
+    this.storyTeller.tell("Cannot pull out the turnip.");
     this.callSomeone();
   }
 };
@@ -69,9 +74,9 @@ Actor.prototype.pull = function(turnip, force) {
 Actor.prototype.callSomeone = function() {
   this.helpActor = this.garden.callTheBestActor();
   if (this.helpActor) {
-    console.log("The " + this.name + " called " + this.helpActor.name);
+    this.storyTeller.tell("The " + this.name + " called " + this.helpActor.name);
     this.dispatcher.triggerEvent(Actor.TRY_AGAIN);
   } else {
-    console.log("The " + this.name + " was asking for help with no success.");
+    this.storyTeller.tell("The " + this.name + " was asking for help with no success.");
   }
 };

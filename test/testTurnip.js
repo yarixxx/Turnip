@@ -5,7 +5,9 @@ TurnipTest.prototype.FORCE_HIGHER_THEN_VALUE = 3;
 TurnipTest.prototype.FORCE_LOWER_THEN_VALUE = 1;
 
 TurnipTest.prototype.setUp = function() {
+  this.storyTeller = new StoryTeller();
   this.turnip = new Turnip();
+  this.turnip.setStoryTeller(this.storyTeller);
 };
 
 TurnipTest.prototype.testPlantTurnipAndPull = function() {

@@ -8,10 +8,12 @@ Garden = function() {
   this.actors = [];
   this.turnips = [];
   this.eventDispatcher = null;
+  this.storyTeller = null;
 };
 
 Garden.prototype.callTheActor = function() {
   var actor = Actor.factory();
+  actor.setStoryTeller(this.storyTeller);
   actor.setGarden(this);
   actor.setEventDispatcher(this.eventDispatcher);
   this.actors.push(actor);
@@ -22,6 +24,10 @@ Garden.prototype.setEventDispatcher = function(eventDispatcher) {
   this.eventDispatcher = eventDispatcher;
 };
 
+Garden.prototype.setStoryTeller = function(storyTeller) {
+  this.storyTeller = storyTeller;
+};
+
 Garden.prototype.callTheBestActor = function() {
   var actorTemplate = this.pullActorWithHighestForce();
   if (!actorTemplate) {
@@ -30,6 +36,7 @@ Garden.prototype.callTheBestActor = function() {
   var actor = this.callTheActor();
   actor.name = actorTemplate.name;
   actor.force = actorTemplate.force;
+  actor.setStoryTeller(this.storyTeller);
   return actor;
 };
 
@@ -46,6 +53,7 @@ Garden.prototype.pullActorWithHighestForce = function() {
 
 Garden.prototype.getTurnipSeed = function() {
   var turnip = Turnip.factory();
+  turnip.setStoryTeller(this.storyTeller);
   this.turnips.push(turnip);
   return turnip;
 };

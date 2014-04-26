@@ -10,11 +10,15 @@ Turnip.factory = function() {
   return new Turnip();
 };
 
+Turnip.prototype.setStoryTeller = function(storyTeller) {
+  this.storyTeller = storyTeller;
+};
+
 /**
  * @param value {Integer}
  */
 Turnip.prototype.plant = function(value) {
-  console.info("Turnip grown up (" + value + ")");
+  this.storyTeller.tell("Turnip grown up (" + value + ")");
   this.value = value;
 };
 
@@ -22,6 +26,6 @@ Turnip.prototype.plant = function(value) {
  * @param force {Integer}
  */
 Turnip.prototype.pull = function(force) {
-  console.log("pull " + force + " " + this.value);
+  this.storyTeller.tell("pull " + force + " " + this.value);
   return force >= this.value;
 };
